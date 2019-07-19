@@ -17,14 +17,15 @@ let total = 0;
 
 let direction;
 document.addEventListener("keydown", e => {
-    let key = event.key;
-    if((key === 'ArrowLeft' || key === 'a') && direction !== "RIGHT"){
+    let pressedKey = e.key;
+    console.log(pressedKey);
+    if((pressedKey === 'ArrowLeft' || pressedKey === 'a') && direction !== "RIGHT"){
         direction = "LEFT";
-    }else if((key === 'ArrowUp' || key === 'w') && direction !== "DOWN"){
+    }else if((pressedKey === 'ArrowUp' || pressedKey === 'w') && direction !== "DOWN"){
         direction = "UP";
-    }else if((key === 'ArrowRight' || key === 'd') && direction !== "LEFT"){
+    }else if((pressedKey === 'ArrowRight' || pressedKey === 'd') && direction !== "LEFT"){
         direction = "RIGHT";
-    }else if((key === 'ArrowDown' || key === 's') && direction !== "UP"){
+    }else if((pressedKey === 'ArrowDown' || pressedKey === 's') && direction !== "UP"){
         direction = "DOWN";
     }
 });
@@ -87,13 +88,16 @@ function draw() {
 
     if(snakeX < 0 || snakeY < 0 || snakeX > cnvs.width - size || snakeY > cnvs.height - size){
         clearInterval(interval);
+        document.getElementById('gameOver').style.zIndex = "1";
     }
 }
 function background(){
     ctx.fillStyle='#506780';
     ctx.strokeStyle='#ffffff';
+    ctx.lineWidth = 10;
     ctx.fillRect(0, 0, cnvs.width, cnvs.height);
     ctx.strokeRect(0, 0, cnvs.width, cnvs.height);
+    ctx.lineWidth = 2;
 }
 function drawApple(){
     ctx.fillStyle='#ffffff';
