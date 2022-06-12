@@ -16,18 +16,26 @@ let apple = {
 let total = 0;
 
 let direction;
+
+var did_change_direction = 0;
 document.addEventListener("keydown", e => {
     let pressedKey = e.key;
     console.log(pressedKey);
-    if((pressedKey === 'ArrowLeft' || pressedKey === 'a') && direction !== "RIGHT"){
-        direction = "LEFT";
-    }else if((pressedKey === 'ArrowUp' || pressedKey === 'w') && direction !== "DOWN"){
-        direction = "UP";
-    }else if((pressedKey === 'ArrowRight' || pressedKey === 'd') && direction !== "LEFT"){
-        direction = "RIGHT";
-    }else if((pressedKey === 'ArrowDown' || pressedKey === 's') && direction !== "UP"){
-        direction = "DOWN";
-    }
+	if(did_change_direction == 0){
+		if((pressedKey === 'ArrowLeft' || pressedKey === 'a') && direction !== "RIGHT"){
+			direction = "LEFT";
+			did_change_direction = 1;
+		}else if((pressedKey === 'ArrowUp' || pressedKey === 'w') && direction !== "DOWN"){
+			direction = "UP";
+			did_change_direction = 1;
+		}else if((pressedKey === 'ArrowRight' || pressedKey === 'd') && direction !== "LEFT"){
+			direction = "RIGHT";
+			did_change_direction = 1;
+		}else if((pressedKey === 'ArrowDown' || pressedKey === 's') && direction !== "UP"){
+			direction = "DOWN";
+			did_change_direction = 1;
+		}
+	}
 });
 function draw() {
     background();
@@ -90,6 +98,7 @@ function draw() {
         clearInterval(interval);
         document.getElementById('gameOver').style.zIndex = "1";
     }
+	did_change_direction = 0;
 }
 function background(){
     ctx.fillStyle='#506780';
